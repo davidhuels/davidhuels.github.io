@@ -1,0 +1,110 @@
+---
+layout: post
+title:  An Introduction to Whisky with R
+date:   2015-04-08
+categories: jekyll update
+---
+When I moved to Glasgow 4 years ago, I visited the Auchentoshan Distillery just outside of Glasgow. During the tour of the distillery, the guide explained to us, that the taste of the whisky from the different regions in Scotland is as versatile as the Scottish landscape. For beginners, she recommended, start with a whisky from the Lowlands (like Auchentoshan), try a few from the Speyside, then experience the taste of an Highland whisky. Last, invest in a bottle of the Island whiskies, and finally try your developed taste at an Islay whisky.
+
+![scotch_regions](https://upload.wikimedia.org/wikipedia/commons/f/fd/Scotch_regions.svg){:class="img-responsive"}
+
+This whisky order stuck with me and I am still on that whisky journey. But I always wondered, if the recommendation was more personal taste of our guide than actual differences? Luckily, the University of Strathclyde has a dataset of 86 whiskys and categorized their taste on a scale 1-4 for 12 different flavours. Note, if someone else is planning a study like this, I am more than happy to help.
+
+The data can be found [here][data], I just added the official region of the distillery according to this [website][regions]. Furthermore I gave each region a region code, according to the order mentioned above (Lowlands=1, Speyside=2, Highlands=3, Island=4, Islay=5).
+
+At first, let’s see if there is any association of any of the tastes with the region by just plotting it.
+
+![whisky_corr](/assets/whisky/whisky_flavour_corr.png){:class="img-responsive"}
+
+{% highlight R %}
+#the whisky data with additional Region and Region code
+whisky<-read.csv("whisky_annotated.csv")
+ 
+#only region code and flavours in dataframe
+whnew<-whisky[,c(4:15, 19)]
+ 
+#bringing the data in the long format
+library(reshape)
+df.w<- melt(whnew,"Reg.code")
+ 
+library(ggplot2)
+ggplot(df.w, aes(Reg.code, value)) +
+  geom_point(position=position_jitter(width=0.1, height=0.1))+
+  geom_smooth(method=lm)+
+  facet_wrap(~variable, ncol=6)+
+  theme_bw()
+
+{% endhighlight %}
+
+We can already see that there are some good candidates (flavours) which might be correlated with the region of the distillery. Some are increasing with the order of the region, like Body, Smoky, Medicinal – some are decreasing like Sweetness, Malty, Fruity, Floral. For a more statistical approach we do a multiple regression analysis, which gives us the following output.
+
+Analysis of Variance Table
+
+Taste| Df| Sum Sq| Mean Sq| F value|    Pr(>F)
+------- | ---- | ----| ------ | ------ | -------- 
+Body       |1  |4.944  |4.9438 |10.7491  |0.001617 **
+Sweetness  |1 |12.759 |12.7589 |27.7414 |1.417e-06 ***
+Smoky      |1 |15.529 |15.5287 |33.7637 |1.626e-07 ***
+Medicinal  |1 |10.608 |10.6078 |23.0643 |8.441e-06 ***
+Tobacco    |1  |0.010  |0.0098  |0.0212  |0.884564
+Honey      |1  |1.833  |1.8334  |3.9864  |0.049704 *
+Spicy      |1  |0.107  |0.1070  |0.2326  |0.631094
+Winey      |1  |0.094  |0.0936  |0.2035  |0.653273
+Nutty      |1  |0.001  |0.0011  |0.0025  |0.960492
+Malty      |1  |0.170  |0.1702  |0.3701  |0.544895
+Fruity     |1  |0.272  |0.2715  |0.5903  |0.444838
+Floral     |1  |0.008  |0.0077  |0.0168  |0.897347
+
+Residuals 71 32.655  0.4599
+—
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+{% highlight R %}
+whisky.lm<-lm(data=whnew, Reg.code~Body+Sweetness+Smoky+Medicinal+Tobacco+Honey+Spicy+Winey+Nutty+Malty+Fruity+Floral)
+anova(whisky.lm)
+{% endhighlight %}
+
+Out of the 12 different characters of a whisky, only 5 are significantly correlated with the regions in the given order. Honey just passed the magic number to be significant, but with this number of tests, it’s nothing to write home about. Furthermore we can see from the plot, that it is hardly a massive change from Lowlands (1) to Islay (5) in this category.
+
+Of the 4 significant characters of a whisky I arbitrarily handpicked Smoky and Sweetness (Body does not have such a nice correlation, and I don’t think any single malt whisky should be described as “Medicinal”).
+
+We can combine the actual data for each character with the location of the disitillery using the great package ggmap.
+
+A map in ggplot2 is basically a x-y plot, where the x-axis is the GPS coordinates for longitude, and the y-axis is the latitude. To get the coordinates for any location in the world, we can use the geocode function. Using geocode(“Auchentoshan, Scotland”) returns the required coordinates. Next we can draw a map by defining the center of the map and the zoom. Initially I just used “Scotland” as the coordinates, but it just looked better when centered a little bit to the north. Note, Highland Park is just too high north for this scale.
+The size of the dots corresponds to the value of Smokyness or Sweetness.
+
+![whisky_sweet](/assets/whisky/whisky_map_sweetness.png){:class="img-responsive"}
+
+![whisky_smoky](/assets/whisky/whisky_map_smoky.png){:class="img-responsive"}
+
+
+{% highlight R %}
+library(ggmap)
+library(ggplot2)
+ 
+whisky <- cbind(whisky, geocode(paste(whisky$Distillery, "Scotland", sep = " ,")))
+ 
+#manual change for more scotland on the map
+north_scotland<-c(lon=-4.202646, lat=56.8)
+#getting the map with the coordinates above in the center
+whiskyMap <- get_map(location=north_scotland, zoom=7, scale=2, color="bw")
+ 
+#picked the colours from the wiki image of Whisky Regions
+colours<-c("#8CC056", "#D1C370", "#CD9C62", "#618EBD", "#D17070")
+ 
+#draw 2 plots, one with size according to Smoky, one with size according to Sweetness
+ggmap(whiskyMap, extent="device", legend="right") +
+  geom_point(data = whisky, aes(x = lon, y = lat, colour= as.factor(Reg.code),size = Smoky))+
+  scale_colour_manual(values=colours,
+                      name="Whisky Region",
+                      breaks=c(1, 2, 3, 4, 5),
+                      labels=c("Lowlands", "Speyside", "Highland", "Island", "Islay"))
+
+{% endhighlight %}
+
+So, next time you have a whisky, you can be safe to say that generally the whisky from the Lowlands and Speyside are sweeter but less smoky than the ones from the Highlands and Islands. Also, interestingly, some of the regions do not fit with the actual location of the distillery. A different approach to the same data can be found [here][revolution], where I found the idea for this post.
+
+
+[data]: https://www.mathstat.strath.ac.uk/outreach/nessie/nessie_whisky.html
+[regions]: https://www.maltmadness.com/whisky/
+[revolution]: http://blog.revolutionanalytics.com/2013/12/k-means-clustering-86-single-malt-scotch-whiskies.html
