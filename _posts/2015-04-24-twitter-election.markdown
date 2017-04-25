@@ -3,7 +3,6 @@ layout: post
 title:  Twitter analysis for the General Election
 date:   2015-04-24
 categories: jekyll update
-google-analytics: UA-98138576-1
 ---
 The general election in the UK is approaching. We all have seen in the last US elections how Obama used social media (i.e. facebook and twitter) for his campaign.
 To my surprise in the UK any political advertisment in TV or radio is banned (in contrast to other European countries). So it is not surprising that all the political parties make heavy use of twitter to get their message across.
