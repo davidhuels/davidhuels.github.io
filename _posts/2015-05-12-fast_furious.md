@@ -3,6 +3,7 @@ layout: post
 title:  Fast and the Furious is becoming more popular
 date:   2015-05-12
 categories: jekyll update
+google-analytics: UA-98138576-1
 ---
 Last week I finally made it in the latest Fast and the Furious film. And well…it was ok, but actually most of the time I tried to figure out which of the scenes where played by Paul Walker and which by his brother? Nevertheless, so far this is the most successful and highest rated film of the whole series. Why are they getting so successful?
 

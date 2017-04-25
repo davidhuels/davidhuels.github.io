@@ -3,6 +3,7 @@ layout: post
 title:  An Introduction to Whisky with R
 date:   2015-04-08
 categories: jekyll update
+google-analytics: UA-98138576-1
 ---
 When I moved to Glasgow 4 years ago, I visited the Auchentoshan Distillery just outside of Glasgow. During the tour of the distillery, the guide explained to us, that the taste of the whisky from the different regions in Scotland is as versatile as the Scottish landscape. For beginners, she recommended, start with a whisky from the Lowlands (like Auchentoshan), try a few from the Speyside, then experience the taste of an Highland whisky. Last, invest in a bottle of the Island whiskies, and finally try your developed taste at an Islay whisky.
 

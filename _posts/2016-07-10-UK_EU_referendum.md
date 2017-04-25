@@ -3,6 +3,7 @@ layout: post
 title:  The UK EU referendum
 date:   2016-07-10
 categories: jekyll update
+google-analytics: UA-98138576-1
 ---
 Two weeks ago, for the EU referendum I was all ready and set. The original plan was to live update and analyse the Brexit vote in the early morning. I prepared all the data tables and the code and I was ready to go. What I didn’t anticipate was that the UK actually voted to leave.
 

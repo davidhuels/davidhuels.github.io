@@ -3,6 +3,7 @@ layout: post
 title:  Collaborations in Science across the World
 date:   2015-09-13
 categories: jekyll update
+google-analytics: UA-98138576-1
 ---
 In one of my earlier posts I showed that over the last 20 years the increase in the number of authors can be largely attributed to the genomic sequencing efforts. In this post I took a closer look at the number of authors per journal and tried to quantify collaborations, national and international.
 
