@@ -22,7 +22,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: davidhuels
 github_username:  davidhuels
-google-analytics: UA-98095323-1
+google_analytics: UA-98095323-1
 logo: /assets/plotspotter_logo_original.png
 
 # Build settings
