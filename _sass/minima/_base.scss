@@ -37,14 +37,18 @@ ul, ol, dl, figure,
   margin-bottom: $spacing-unit / 2;
 }
 
-
-
 /**
  * Images
  */
 img {
   max-width: 100%;
   vertical-align: middle;
+}
+
+img.preview {
+  width: 120px;
+  float: left;
+  margin-right: 20px;
 }
 
 
@@ -75,8 +79,6 @@ li {
     margin-bottom: 0;
   }
 }
-
-
 
 /**
  * Headings

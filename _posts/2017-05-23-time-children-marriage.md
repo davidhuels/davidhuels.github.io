@@ -3,6 +3,7 @@ layout: "post"
 title: "Is it time? Marriage and Births in data"
 date: 2017-05-23
 categories: jekyll update
+image: mother_firstchild.png
 ---
 Looking at my Facebook newsfeed today is very different from what it used to be 5 years ago. At that time the newsfeed was filled with the typical posts, which can be categorised like this: holidays, parties, food and the occasional dog/cat. Now something has changed, the list grew by two more items... weddings and babies. 
 This is when I realised that I must have reached the critical age now. But when is actually the time that people get their first child? 

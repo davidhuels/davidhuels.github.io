@@ -3,6 +3,7 @@ layout: post
 title:  Friends don’t let friends use two y-axes
 date:   2016-12-30
 categories: jekyll update
+image: economist.png
 ---
 I recently came across an article in the economist in which the author describes a correlation between joblessness and the rise in wages. The authors say that”Economists expect that when joblessness falls, wages will rise…”. However, after the recession, the wages are not going up as predicted. I usually don’t give much notice to economical trends, but here I was curious as the graph was shown with two y-axes.
 
