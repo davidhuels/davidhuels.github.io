@@ -215,3 +215,88 @@ pre {
     padding-top: 5px;
   }
 }
+
+
+
+// copy/paste from popcorn
+
+.constrain {
+  width: 100%;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1em;
+  padding-right: 1em;
+  box-sizing: border-box;
+}
+
+.form {
+  position: relative;
+}
+
+.form--loading:before {
+  content: '';
+}
+
+.form--loading .form__spinner {
+  display: block;
+}
+
+.form:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  z-index: 10;
+}
+
+ .form__spinner {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 11;
+}
+
+.mdl-textfield {
+    position: relative;
+    font-size: 16px;
+    display: inline-block;
+    box-sizing: border-box;
+    width: 300px;
+    max-width: 100%;
+    margin: 0;
+    padding: 20px 0;
+}
+.mdl-textfield__input {
+    border: none;
+    border-bottom: 1px solid rgba(0,0,0,.12);
+    display: block;
+    font-size: 16px;
+    margin: 0;
+    padding: 4px 0;
+    width: 100%;
+    background: 0 0;
+    text-align: left;
+    color: inherit;
+}
+
+/* 
+fieldset{
+  width: 350px;
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: left;
+}
+
+legend{
+background-color: #efefef;
+border: 1px solid #dcdcdc;
+border-radius: 10px;
+padding:10px 20px;
+text-align: center;
+text-transform: uppercase;
+} */
