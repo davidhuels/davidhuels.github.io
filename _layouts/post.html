@@ -11,8 +11,9 @@ layout: default
         {{ page.date | date: date_format }}
       </time>
       {% if page.author %}
-        • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>
-      {% endif %}</p>
+        <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>
+      {% endif %}
+    </p>
   </header>
 
   <div class="post-content" itemprop="articleBody">
@@ -22,14 +23,12 @@ layout: default
   <section class="constrain">
     <h3>Leave a Reply</h3>
     {% include comments-new.html %}
-    </section>
-  
-    <section class="constrain">
-    <h3>All comments</h3>
-
-    {% include comments.html %}
   </section>
   
+  <section class="constrain">
+    {% include comments.html %}
+  </section>
+
   <!-- {% if site.disqus.shortname %}
     {% include disqus_comments.html %}
   {% endif %} -->
