@@ -35,3 +35,12 @@ exclude:
   - Gemfile
   - Gemfile.lock
 
+# Name of repository, for use with Staticman
+repository: "davidhuels/davidhuels.github.io"
+
+# Staticman comments (see staticman.yml for configuration).
+staticman:
+  branch: "master"
+
+
+
