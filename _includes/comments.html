@@ -1,5 +1,5 @@
 <div class="js-comments">
-	{% assign comments = site.data.comments | sort %}
+	{% assign comments = site.data.comments[page.slug] | sort %}
 	
 	{% for comment in comments reversed %}
 		{% assign commentData = comment[1] %}
@@ -10,7 +10,7 @@
 		  </div>
 		  <div class="mdl-card__supporting-text">
 		    <div class="review__description">
-		    	{{ commentData.description | markdownify }}
+		    	{{ commentData.message | markdownify }}
 		    </div>
 		  </div>
 		</article>
