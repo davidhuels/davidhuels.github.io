@@ -1,23 +1,23 @@
-<!-- Comment form -->
-<h3>Post a comment:</h3>
-<form method="POST" action="https://api.staticman.net/v2/entry/{{ site.repository }}/{{ site.staticman.branch }}/comments">
+<section class="constrain">
+  <form class="js-form form" method="POST" action="https://api.staticman.net/v2/entry/{{ site.repository }}/{{ site.staticman.branch }}/comments">
   <input name="options[redirect]" type="hidden" value="http://plotspotter.org">
   <input name="options[slug]" type="hidden" value="{{ page.slug }}">
-  <div>
-    <legend>Name</legend>
-    <input name="fields[name]" type="text">
-  </div>
-  <div>
-    <legend>E-mail (optional)</legend>
-    <input name="fields[email]" type="email">
-  </div>
-  <div>
-    <legend>Message (<a href="https://kramdown.gettalong.org/syntax.html">kramdown</a> markup allowed)</legend>
-    <textarea style="width:100%" name="fields[message]" rows="12"></textarea>
-  </div>
-  
-  <div>
-    <legend><em>Comments will appear after moderation.</em></legend>
-    <button type="submit">Submit Comment</button>
-  </div>
-</form>
+    <fieldset class="field-group">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" id="comment-form[name]" name="fields[name]"/>
+        <label class="mdl-textfield__label" for="comment-form[name]">Your name</label>
+      </div>
+    </fieldset>
+    <fieldset class="field-group">
+      <div class="mdl-textfield mdl-textfield--floating-label mdl-js-textfield">
+        <textarea class="mdl-textfield__input" name="fields[message]" type="text" rows= "3" id="comment-form[message]"></textarea>
+        <label class="mdl-textfield__label" for="comment-form[message]">Enter your comment here... Comments will appear after moderation.</label>
+      </div>
+    </fieldset>
+    <fieldset class="field-group">
+      <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+        Submit
+      </button>
+    </fieldset>
+  </form>
+</section>
